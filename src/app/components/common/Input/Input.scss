@@ -1,0 +1,31 @@
+@import '~vars';
+
+.input-box {
+  margin-bottom: 16px;
+  width: 100%;
+  height: 50px;
+  border-radius: 4px;
+  transition: $transition;
+}
+
+input {
+  display: flex;
+  padding: 0 25px;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  border: solid 2px $grey;
+  align-items: center;
+  border-radius: 4px;
+  transition: $transition;
+
+  &:-webkit-autofill {
+    transition: background-color 0.1s ease-in-out 0s;
+  }
+
+  &:focus, &:active { outline: none; }
+}
+
+.active input {
+  border-color: $blue;
+}

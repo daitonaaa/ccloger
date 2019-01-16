@@ -1,0 +1,16 @@
+@import '~vars', '~mixins';
+
+.logger {
+  overflow: auto;
+  margin-left: 15px;
+  padding: 15px;
+  flex: 1;
+  border-radius: 4px;
+  border: 1px solid $grey;
+}
+
+.empty {
+  @include flexBox(center);
+  font-size: 150px;
+  color: $grey;
+}

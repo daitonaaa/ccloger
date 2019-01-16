@@ -1,0 +1,50 @@
+@import '~vars';
+
+.select {
+  position: relative;
+  width: 100%;
+
+  &.showOptions .select-box:after {
+    transform: rotate(180deg);
+  }
+
+  &-box {
+    position: relative;
+    padding: 12px 24px;
+    font-size: 18px;
+    border: 1px solid $grey;
+    border-radius: $border;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:after {
+      position: absolute;
+      content: '';
+      top: calc(50% - 2.5px);
+      border-color: #999 transparent transparent;
+      border-style: solid;
+      border-width: 5px 5px 0;
+      right: 10px;
+    }
+  }
+
+  &-options {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    background: #fff;
+    box-shadow: $boxShadowLittle;
+
+    &__item {
+      padding: 8px 10px;
+      color: rgba(51, 51, 51, 0.8);
+
+      &:hover, &.active {
+        background: rgba(204, 226, 255, 0.25);
+        cursor: pointer;
+      }
+    }
+  }
+}

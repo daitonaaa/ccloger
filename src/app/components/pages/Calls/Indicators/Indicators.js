@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import React, { Component, Fragment } from 'react';
@@ -10,38 +11,51 @@ import styles from './Indicators.scss';
 class Indicators extends Component {
 
   static propTypes = {
-    init: PropTypes.bool.isRequired,
-    userData: PropTypes.string.isRequired,
-    indicators: PropTypes.object.isRequired,
+    state: PropTypes.string.isRequired,
+    userData: PropTypes.object.isRequired,
   }
 
   render() {
     const {
+      state,
       userData,
-      indicators,
     } = this.props;
-
-    const statusIsConnectind = indicators.name === 'CONNECTING';
-    const statusIsReady = indicators.name === 'SUCCESS_CONNECT';
 
     return (
       <div className={styles.indicators}>
         <div className={styles.initProcess}>
           {
-            statusIsConnectind && (
+            state === 'CONNECTING' && (
               <div className={styles.isConnecting}>
                 <Loading min />
-                <span>{indicators.text}</span>
+                <span>Соединение...</span>
+              </div>
+            )
+          }
+          {
+            state === 'CONNECTINON_FAILED' && (
+              <div className={cx(styles.isConnecting, {
+                [styles.error]: true,
+              })}>
+                <span>Ошибка при подключении</span>
+              </div>
+            )
+          }
+          {
+            state === 'SUCCESS_CONNECT' && (
+              <div className={styles.isConnected}>
+                <i className="zmdi zmdi-network"></i>
+                <span>Подключён к сети</span>
               </div>
             )
           }
         </div>
         <div className={styles.tray}>
           {
-            statusIsReady && (
+            state === 'SUCCESS_CONNECT' && (
               <div className={styles.trayItem}>
                 <i className="zmdi zmdi-account" />
-                <span>{userData.displayName}</span>
+                <span>Оператор: {userData.displayName}</span>
               </div>
             )
           }
@@ -52,7 +66,7 @@ class Indicators extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  ...state.callsVoxImplant,
+  ...state.voxImplant.main,
 });
 
 const mapDispatchToProps = {

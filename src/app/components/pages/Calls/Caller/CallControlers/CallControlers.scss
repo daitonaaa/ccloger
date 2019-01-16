@@ -1,0 +1,39 @@
+@import '~vars', '~mixins';
+
+.call-controlers {
+  @include flexBox(flex-end);
+  margin-top: -200px;
+  height: 50px;
+  opacity: 0;
+  transition: $transition;
+  pointer-events: none;
+}
+
+.call-controlers-active {
+  opacity: 1;
+  margin-top: 15px;
+  pointer-events: initial;
+}
+
+.reject-call, .mute, .pause {
+  @include flexBox(center);
+  width: 50px;
+  height: 100%;
+  border-radius: $border;
+  margin-left: 7.5px;
+  color: #fff;
+  font-size: 22px;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
+}
+
+.reject-call {
+  background: $red;
+}
+
+.mute, .pause {
+  background: $blue;
+}

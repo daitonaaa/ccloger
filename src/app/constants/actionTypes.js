@@ -1,6 +1,13 @@
 // global
 export const SET_APP_LOADING_STATUS = 'SET_APP_LOADING_STATUS';
 
-// callsVoxImplant
-export const SET_VOX_DATA = 'SET_VOX_DATA';
-export const SET_VOX_USER_DATA = 'SET_VOX_USER_DATA';
+
+// voxImplant
+// -- main
+export const VOX_IMPLANT_SET_STATE = 'VOX_IMPLANT_SET_STATE';
+export const VOX_IMPLANT_SET_USER_DATA = 'VOX_IMPLANT_SET_USER_DATA';
+
+// -- caller
+export const VOX_IMPLANT_ADD_LOG = 'VOX_IMPLANT_ADD_LOG';
+export const VOX_IMPLANT_SET_DATA = 'VOX_IMPLANT_SET_DATA';
+export const VOX_IMPLANT_SET_DIALING = 'VOX_IMPLANT_SET_DIALING';

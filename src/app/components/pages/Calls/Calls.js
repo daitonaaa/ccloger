@@ -3,12 +3,12 @@ import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import React, { Component, Fragment } from 'react';
 
-import VOX from 'constants/voxImplant';
-
 import {
   voxImplantInit,
-} from 'actions/callsVoxImplant';
+  clientDevicesAudit,
+} from 'actions/voxImplant';
 
+import Caller from './Caller';
 import Indicators from './Indicators';
 import { PageHeader } from 'components/common';
 
@@ -17,14 +17,30 @@ class Calls extends Component {
 
   static propTypes = {
     route: PropTypes.object.isRequired,
+    state: PropTypes.string.isRequired,
 
     voxImplantInit: PropTypes.func.isRequired,
+    clientDevicesAudit: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
-    const { voxImplantInit } = this.props; 
- 
-    voxImplantInit();
+    const {
+      state,
+      voxImplantInit,
+    } = this.props; 
+
+    if (state !== 'CONNECTING') voxImplantInit();
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      state,
+      clientDevicesAudit,
+    } = this.props;
+
+    if (prevProps.state !== 'SUCCESS_CONNECT' && state === 'SUCCESS_CONNECT') {
+      clientDevicesAudit();
+    }
   }
 
   render() {
@@ -37,17 +53,19 @@ class Calls extends Component {
         </Helmet>
         <PageHeader pageTitle={route.title} />
         <Indicators />
+        <Caller />
       </Fragment>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  ...state.callsVoxImplant,
+  ...state.voxImplant.main,
 });
 
 const mapDispatchToProps = {
   voxImplantInit,
+  clientDevicesAudit,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Calls);

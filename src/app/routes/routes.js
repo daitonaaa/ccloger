@@ -19,7 +19,7 @@ const routes = [
       {
         ...url.calls,
         component: Calls,
-        title: 'Звонки и телефония'
+        title: 'VoxImplant'
       }
     ]
   }

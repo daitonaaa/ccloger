@@ -1,0 +1,19 @@
+@import '~vars';
+
+.log {
+  padding: 7.5px 0;
+  font-size: 18px;
+}
+
+.notif {
+  color: $blue;
+}
+
+.error {
+  color: $red;
+  font-weight: bold;
+}
+
+.trust {
+  color: $green;
+}

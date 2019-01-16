@@ -1,0 +1,56 @@
+@import '~vars', '~mixins';
+
+.call-display {
+  display: flex;
+  height: 150px;
+  padding: 15px;
+  background: $blue;
+  border-radius: $border;
+  transition: $transition;
+  transform: scale(0);
+  pointer-events: none;
+}
+
+.call-display-visible {
+  transform: scale(1);
+  pointer-events: initial;
+}
+
+.call-display-icon {
+  @include flexBox(center);
+  width: 30%;
+  height: 100%;
+  font-size: 70px;
+  color: #fff;
+}
+
+.call-display-animate {
+  animation: inf-background 2.5s ease-in-out infinite;
+}
+
+.call-display-info {
+  @include flexBox();
+  padding-left: 25px;
+  flex: 1;
+  height: 100%;
+  color: #fff;
+  font-size: 22px;
+}
+
+@keyframes inf-background {
+  0% {
+    background: $blue;
+  }
+  25% {
+    background: #0789b9;
+  }
+  50% {
+    background: #22b0e6;
+  }
+  75% {
+    background: #2197c3;
+  }
+  100% {
+    background: $blue;
+  }
+}

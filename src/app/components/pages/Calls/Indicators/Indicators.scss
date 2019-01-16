@@ -4,8 +4,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
-  margin-top: 15px;
+  height: 40px;
+  margin-top: 10px;
 }
 
 .tray {
@@ -29,10 +29,22 @@
   }
 }
 
-.is-connecting {
+.is-connecting, .is-connected {
   @include flexBox();
 
   span {
     padding-left: 7px;
   }
+}
+
+.is-connected {
+  color: $green;
+
+  i {
+    font-size: 25px;
+  }
+}
+
+.error {
+  color: $red;
 }

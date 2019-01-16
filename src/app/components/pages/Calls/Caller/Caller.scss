@@ -1,0 +1,102 @@
+@import '~vars', '~mixins';
+
+.caller {
+  margin-top: 25px;
+  display: flex;
+  flex: 1;
+}
+
+.no-ready {
+  padding-top: 15px;
+  pointer-events: none;
+
+  .title, input, .tel-controlers {
+    filter: blur(5px);
+  }
+}
+
+.tel {
+  position: relative;
+  width: 350px;
+  transition: $transition;
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  left: -5px;
+  right: -5px;
+  bottom: 0;
+  z-index: 5;
+  border-radius: $border;
+  background: $grey;
+  animation: tel-loading 1.5s ease-in-out infinite;
+}
+
+.title {
+  padding-bottom: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: $blue;
+  transition: $transition;
+}
+
+.callerPhone {
+  height: 150px;
+}
+
+.tel-controlers {
+  @include flexBox();
+  height: 48px;
+  transition: $transition;
+}
+
+.tel-mode {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 15px;
+  width: 75%;
+  height: 100%;
+}
+
+.tel-mode-item {
+  @include flexBox(center);
+  height: 100%;
+  width: 50px;
+  border-radius: $border;
+  background: $grey;
+  font-size: 22px;
+  color: #fff;
+  transition: $transition;
+
+  &:hover {
+    cursor: pointer;
+    background: $blue;
+  }
+
+  &:last-child {
+    margin-left: 7.5px;
+  }
+}
+
+.tel-mode-item-active {
+  background: $blue;
+}
+
+@keyframes tel-loading {
+  0% {
+    background: rgba(236, 236, 236, 0.8);
+  }
+  25% {
+    background: rgba(236, 236, 236, 0.2);
+  }
+  50% {
+    background: rgba(236, 236, 236, 0.4);
+  }
+  75% {
+    background: rgba(236, 236, 236, 0.6);
+  }
+  100% {
+    background: rgba(236, 236, 236, 0.8);
+  }
+}

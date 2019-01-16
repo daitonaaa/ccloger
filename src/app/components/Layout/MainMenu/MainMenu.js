@@ -52,9 +52,11 @@ class MainMenu extends Component {
           <i className={styles.menuSticky} />
           <i className={styles.menuSticky} />
         </div>
-        <div className={cx(styles.menuWrapper, {
-          [styles.menuWrapperActive]: opened,
-        })}>
+        <div
+          className={cx(styles.menuWrapper, {
+            [styles.menuWrapperActive]: opened,
+          })}
+        >
           <div className={cx(styles.menuContent, {
             [styles.menuContentActive]: showContent,
           })}>

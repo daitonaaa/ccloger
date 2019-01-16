@@ -2,11 +2,11 @@ import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 
 import global from './global';
-import callsVoxImplant from './callsVoxImplant';
+import voxImplant from './voxImplant';
 
 export const reducers = {
   global,
-  callsVoxImplant,
+  voxImplant,
 };
 
 const rootReducer = (browserHistory) => combineReducers({
