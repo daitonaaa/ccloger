@@ -33,6 +33,7 @@ module.exports = {
 
       scss: path.resolve(rootFolder, 'src/app/scss'),
       vars: path.resolve(rootFolder, 'src/app/scss/_vars.scss'),
+      mixins: path.resolve(rootFolder, 'src/app/scss/_mixins.scss'),
     },
 
     extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.scss'],

@@ -1,7 +1,6 @@
 @import 'normalize';
 @import 'vars';
-@import 'iconic-fonts';
 
 body {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: $fontUbuntu;
 }

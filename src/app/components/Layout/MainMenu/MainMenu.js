@@ -22,7 +22,7 @@ class MainMenu extends Component {
 
   componentDidMount() {
     this.linksNodeEl.addEventListener('click', ({ target }) => {
-      if (target.tagName === 'A') this.toggleMenu();
+      if (target.tagName === 'A' || target.parentNode.tagName === 'A') this.toggleMenu();
     })
   }
 
@@ -38,7 +38,10 @@ class MainMenu extends Component {
   }
 
   render() {
-    const { opened, showContent } = this.state;
+    const {
+      opened,
+      showContent,
+    } = this.state;
 
     return (
       <Fragment>
@@ -55,12 +58,19 @@ class MainMenu extends Component {
           <div className={cx(styles.menuContent, {
             [styles.menuContentActive]: showContent,
           })}>
-            <div className={styles.menuTitle}>Credit club logger</div>
+            <div className={styles.menuTitle}>Credit club - Control panel</div>
             <div className={styles.menuListLinks} ref={(el) => this.linksNodeEl = el}>
               <Link
                 title='Мониторинг'
                 className={styles.link}
                 to={url.monitoring.path}
+                icon="zmdi zmdi-chart-donut"
+              />
+              <Link
+                to={url.calls.path}
+                className={styles.link}
+                title='Звонки и телефония'
+                icon="zmdi zmdi-phone-in-talk"
               />
             </div>
           </div>

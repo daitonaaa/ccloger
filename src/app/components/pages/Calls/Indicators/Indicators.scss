@@ -1,0 +1,38 @@
+@import '~vars', '~mixins';
+
+.indicators {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  margin-top: 15px;
+}
+
+.tray {
+  @include flexBox(flex-end);
+  height: 100%;
+}
+
+.tray-item {
+  @include flexBox();
+  margin-left: 15px;
+  font-size: 17px;
+  color: $blue;
+
+  i {
+    font-size: 25px;
+    padding-right: 7px;
+  }
+
+  &:last-child {
+    margin-left: 0;
+  }
+}
+
+.is-connecting {
+  @include flexBox();
+
+  span {
+    padding-left: 7px;
+  }
+}
