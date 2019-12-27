@@ -11,6 +11,10 @@
   pointer-events: none;
 }
 
+.call-display-connected {
+  background: $green;
+}
+
 .call-display-visible {
   transform: scale(1);
   pointer-events: initial;

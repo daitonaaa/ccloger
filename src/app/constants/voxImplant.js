@@ -1,8 +1,8 @@
 export default {
 
   AUTH_INFO: {
-    PASSWORD: 'pav13579',
-    USER: 'pavel@cclub.kuliginpavel.voximplant.com',
+    PASSWORD: '123456',
+    USER: 'testuser@universal.kuliginpavel.voximplant.com',
   },
 
 }

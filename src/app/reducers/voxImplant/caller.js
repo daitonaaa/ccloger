@@ -21,6 +21,16 @@ const caller = (state = initialState, action) => {
     case actionTypes.VOX_IMPLANT_SET_DATA:
       return state.set([action.field], action.value);
 
+    case actionTypes.VOX_IMPLANT_RESET_CALL:
+      return state.merge({
+        call: {},
+        callStatus: null,
+        dialingOptions: {
+          inc: '',
+          mode: 'tel',
+        },
+      })
+
     case actionTypes.VOX_IMPLANT_SET_DIALING:
       return state.setIn(['dialingOptions', [action.field]], action.value);
 

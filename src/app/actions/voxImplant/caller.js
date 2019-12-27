@@ -7,6 +7,11 @@ export const setDialing = (field, value) => ({
 });
 
 
+const resetCall = () => ({
+  type: actionTypes.VOX_IMPLANT_RESET_CALL
+});
+
+
 const addLog = (log) => ({
   type: actionTypes.VOX_IMPLANT_ADD_LOG,
   log,
@@ -19,35 +24,46 @@ const setData = (field, value) => ({
 });
 
 
-export const voxImplantCall = () => (dispatch, getState) => {
+const closeCall = (call) => (dispatch) => {
+  dispatch(voxImplantResetCall());
+  call.hangup();
+};
+
+
+const createCall = () => (dispatch, getState) => {
   const voximplant = VoxImplant.getInstance();
-  const messenger = VoxImplant.getMessenger();
-  console.log("​voxImplantCall -> messenger", messenger);
 
-  const { dialingOptions } = getState().voxImplant.caller;
-  console.log("​voxImplantCall -> dialingOptions", dialingOptions);
+  const { dialingOptions: { inc, mode } } = getState().voxImplant.caller;
 
-  const call = voximplant.call(dialingOptions.inc, false);
-  
+  const customData = `mode=${mode}&inc=${inc}`;
+  const call = voximplant.call(inc, false, customData);
+
+  dispatch(addLog(new Log('TRUST', `Открыта сессия: ${call.id()}`)));
+  dispatch(addLog(new Log('NOTIF', `Инициализация вызова | inc: ${inc}, callMode: ${mode}`)));
+  return call;
+}
+
+
+export const voxImplantCall = () => (dispatch) => {
+  const call = dispatch(createCall());
   dispatch(setData('callStatus', 'CONNECTING'));
 
-  dispatch(addLog(new Log('TRUST', `Вызов: ${call.id()}`)));
-  dispatch(addLog(new Log('NOTIF', `Инициализация | inc: ${dialingOptions.inc}, callMode: ${dialingOptions.mode}`)));
-
   call.addEventListener(VoxImplant.CallEvents.Connected, (e) => {
-    dispatch(addLog(new Log('NOTIF', 'Соединение...')));
-    console.log(e);
+    console.log('Connected', e);
+    dispatch(setData('callStatus', 'CONNECTED'));
+    dispatch(addLog(new Log('TRUST', 'Соединение установлено')));
   });
 
   call.addEventListener(VoxImplant.CallEvents.Disconnected, (e) => {
-    dispatch(addLog(new Log('TRUST', 'Вызов завершён')));
     console.log('Disconnected', e);
-    call.hangup();
+    dispatch(addLog(new Log('NOTIF', 'Вызов завершён')));
+    dispatch(closeCall(e.call));
   });
 
   call.addEventListener(VoxImplant.CallEvents.Failed, (e) => {
-    dispatch(addLog(new Log('ERROR', `Соединение прервано кодом ${e.name}:${e.code}`)));
     console.log('Failed', e);
+    dispatch(addLog(new Log('ERROR', `Соединение прервано кодом ${e.name}:${e.code}`)));
+    dispatch(closeCall(e.call));
   });
 
   call.addEventListener(VoxImplant.CallEvents.ProgressToneStart, e => {
@@ -57,7 +73,14 @@ export const voxImplantCall = () => (dispatch, getState) => {
   call.addEventListener(VoxImplant.CallEvents.ProgressToneStop, e => {
     console.log('ProgressToneStop', e);
   });
-}
+};
+
+
+export const voxImplantResetCall = () => (dispatch) => {
+  const voximplant = VoxImplant.getInstance();
+	console.log("​voxImplantResetCall -> voximplant", voximplant)
+  dispatch(resetCall());
+};
 
 
 // helpers 

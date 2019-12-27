@@ -24,8 +24,6 @@ export const clientDevicesAudit = () => (dispatch, getState) => {
 
 export const voxImplantInit = () => async (dispatch, getState) => {
   const voximplant = VoxImplant.getInstance();
-  console.log("​voxImplantInit -> voximplant", voximplant)
-  console.log("​voxImplantInit -> voximplant", voximplant.getClientState())
   
   if (!voximplant._connected) {
     voximplant.addEventListener(VoxImplant.Events.SDKReady, () => {
